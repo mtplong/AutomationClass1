@@ -121,6 +121,17 @@ public class Demo_05_WorkWithSeleniumApi {
 		alert.accept();
 		sleepInSecond(3);
 	}
+	
+	@Test
+	public void test_07_dragAndDrop() {
+		driver.get("https://demo.guru99.com/test/drag_drop.html");
+		WebElement a = driver.findElement(By.xpath("//li[@id='credit2']"));
+		WebElement b = driver.findElement(By.xpath("//ol[@id='bank']"));
+		Actions action = new Actions(driver);
+		action.dragAndDrop(a, b).build().perform();
+		sleepInSecond(3);
+		
+	}
 
 	public void sleepInSecond(long timeout) {
 		try {
