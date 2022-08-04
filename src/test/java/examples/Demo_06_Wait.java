@@ -193,6 +193,33 @@ public class Demo_06_Wait {
 		
 		// switch trở về page trước
 		driver.switchTo().defaultContent();
+		
+		// switch vào chat iframe
+		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@id='cs_chat_iframe']")));
+		
+		// click vào chat iframe, bắt xpath với contains: //div[contains(@class,'button_bar')]
+		driver.findElement(By.xpath("//div[@class='meshim_widget_components_chatButton_ButtonBar button_bar']")).click();
+		
+		// click vào nút Gửi tin nhắn
+		driver.findElement(By.xpath("//input[@value='Gửi tin nhắn']")).click();
+		
+		Assert.assertEquals(driver.findElement(By.xpath("//input[@ng-model='login.username']/following-sibling::div[contains(@ng-show,'requiredName')]")).getText(), "Tên của bạn chưa được nhập");
+		
+		// switch trở về page trước
+		driver.switchTo().defaultContent();
+		driver.findElement(By.xpath("//input[@id='live-search-bar']")).sendKeys("Excel");
+		driver.findElement(By.xpath("//button[@class='search-button']")).click();
+		
+		List<WebElement>courseName = driver.findElements(By.xpath("//section//div[@class='content']/h4"));
+		
+		Assert.assertEquals(courseName.size(), 9);
+		
+		for(WebElement course:courseName) {
+			Assert.assertTrue(course.getText().contains("Excel"));
+		}
+		
+		sleepInSecond(5);
+		
 	}
 
 	public void scrollToBottomPage() {
